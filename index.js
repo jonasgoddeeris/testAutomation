@@ -175,8 +175,9 @@ console.log("Brand is  " + brand);
 
 
 (async () => {
-  const browser = await puppeteer.launch({headless: true}{ args: ['--no-sandbox'] }); // default is true
+  const browser = await puppeteer.launch({headless: true}, { args: ['--no-sandbox'] }); // default is true
   console.log('start ' + deviceToTest.name);
+  console.log(browser.wsEndpoint());
 
 const page = await browser.newPage();
 
