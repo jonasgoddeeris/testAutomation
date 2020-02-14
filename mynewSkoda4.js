@@ -91,9 +91,9 @@ const galaxyS7 = {
 
 // ---- ADD TESTdevices you want to test to the Array -----
 
-const testDevices = [galaxyS5, galaxyS9, pixel2, Nexus6P, desktop1440_880, iPhoneX, iPhone5, iPad, iPadPro];
+// const testDevices = [galaxyS5, galaxyS9, pixel2, Nexus6P, desktop1440_880, iPhoneX, iPhone5, iPad, iPadPro];
 
-// const testDevices = [iPhoneX];
+const testDevices = [iPhoneX];
 
 // 
 
@@ -174,7 +174,7 @@ console.log("Brand is  " + brand);
 
 
 (async () => {
-  const browser = await puppeteer.launch({headless: true}); // default is true
+  const browser = await puppeteer.launch({headless: false}); // default is true
   console.log('start ' + deviceToTest.name);
 
 const page = await browser.newPage();
