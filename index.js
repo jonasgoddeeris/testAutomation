@@ -17,6 +17,37 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const fse = require('fs-extra');
 const devices = require('puppeteer/DeviceDescriptors');
+const WebSocket = require('isomorphic-ws')
+
+const ws = new WebSocket('wss://echo.websocket.org/', {
+  origin: 'https://websocket.org'
+});
+
+ws.onopen = function open() {
+  console.log('connected');
+  ws.send(Date.now());
+};
+
+ws.onclose = function close() {
+  console.log('disconnected');
+};
+
+ws.onmessage = function incoming(data) {
+  console.log(`Roundtrip time: ${Date.now() - data.data} ms`);
+
+  setTimeout(function timeout() {
+    ws.send(Date.now());
+  }, 500);
+};
+
+
+
+
+
+
+
+
+
 
 //Devices from https://github.com/puppeteer/puppeteer/blob/master/lib/DeviceDescriptors.js
 const Nexus6P = devices[ 'Nexus 6P' ];
@@ -180,7 +211,7 @@ console.log("Brand is  " + brand);
   console.log(browser.wsEndpoint());
 
   // on local machine COMMENT 
-  const browser = await bundledPuppeteer.connect({browserWSEndpoint: "<my-ws-endpoint>"});
+  // const browser = await bundledPuppeteer.connect({browserWSEndpoint: "<my-ws-endpoint>"});
   //END COMMENT
 
 const page = await browser.newPage();
