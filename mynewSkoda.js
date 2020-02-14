@@ -174,7 +174,7 @@ console.log("Brand is  " + brand);
 
 
 (async () => {
-const browser = await puppeteer.launch({headless: false}); // default is true
+const browser = await puppeteer.launch({headless: false}{ args: ['--no-sandbox'] }); // default is true
 console.log('start ' + deviceToTest.name);
 
 const page = await browser.newPage();
@@ -183,13 +183,14 @@ const page = await browser.newPage();
 await page.emulate(deviceFulldetails);
 
 
-
+//
+//
 //optimize preview load (uncomment to just test a normal website with no ab test)
 // await page.goto(previewURL);
 // await page.click('body > div > div > div > main > md-whiteframe > div > div > div.opt-preview-content.opt-preview-link-container.ng-scope > a');
 // await page.content();
 // await page.waitFor(5000);
-
+//
 //
 
 //normal page load
