@@ -179,6 +179,10 @@ console.log("Brand is  " + brand);
   console.log('start ' + deviceToTest.name);
   console.log(browser.wsEndpoint());
 
+  // on local machine COMMENT 
+  const browser = await bundledPuppeteer.connect({browserWSEndpoint: "<my-ws-endpoint>"});
+  //END COMMENT
+
 const page = await browser.newPage();
 
 //emulate device new
