@@ -7,15 +7,21 @@ const WebSocket = require('isomorphic-ws')
 
 
 // 
-//!--- READ THIS
+//
+//------------------------------ READ THIS ---------------------------------
+//
+//
 // before starting
 // you need to add preview URL, URL and testDEVICES !!!!
-//-----END READ THIS
+//
+//
+//------------------------------ END READ THIS ----------------------------------
+//
 //
 
 
 
-
+//--------- custom WebSocket
 
 const ws = new WebSocket('wss://echo.websocket.org/', {
   origin: 'https://websocket.org'
@@ -38,11 +44,12 @@ ws.onmessage = function incoming(data) {
   }, 500);
 };
 
+//------ end custom WebSocket
 
 
 
 
-
+// --- --------- DEVICES OBJECTS 
 //Devices from https://github.com/puppeteer/puppeteer/blob/master/lib/DeviceDescriptors.js
 const Nexus6P = devices[ 'Nexus 6P' ];
 const Nexus6 = devices[ 'Nexus 6' ];
@@ -113,6 +120,10 @@ const galaxyS7 = {
 }
 
 
+// ---- END TEST DEVICES 
+
+
+
 
 // ---- ADD TESTdevices you want to test to the Array -----
 
@@ -120,10 +131,12 @@ const galaxyS7 = {
 
 const testDevices = [iPhoneX];
 
-// 
 
 
-//brand objects
+
+
+
+//---------  start brand objects
 
 const skodaObject = {
   name: 'Skoda MyNew',
@@ -135,10 +148,12 @@ const audiObject = {
   url: 'https://cloud.mail.dieteren.be/mynew/cars?lang=nl&brand=Audi'
 }
 
-//end brand objects
+//-------- end brand objects
 
 
-//date time stamp formatting
+
+
+//------------ start date time stamp formatting
 
 let fullDate = new Date();
 let dd = String(fullDate.getDate()).padStart(2, '0');
@@ -172,14 +187,14 @@ let dateTime = today + "-" + time;
 console.log("dateTime is " + dateTime);
 
 
-// end dateTime Stamp formatting
+//------------ end dateTime Stamp formatting
 
 
-// Run function
+// -----  function START -------- ----------------------------------------------- -----------------------
 
-// testAll(testDevices);  //commented to sse effect on build !!
 
-// end run function
+testAll(testDevices);  //commented to see effect on build !!
+
 
 function testAll (data) {
   for (let deviceToTest of data){
@@ -188,30 +203,36 @@ function testAll (data) {
 
 
 
-
-
 // ---FILL IN AB TEST PREVIEW URL AND/OR flow start URL  ---
 
-// const previewURL = "https://www.google-analytics.com/gtm/set_cookie?uiv2&id=GTM-TS4PDF6&gtm_auth=G4S7idMaTbioFtOmTgrRug&gtm_debug&gtm_experiment=GTM-TS4PDF6_OPT-WRW33%241&gtm_preview=opt_preview-slim&redirect=https%3A%2F%2Foptimize.google.com%2Foptimize%2Fsharepreview%3Fid%3DGTM-TS4PDF6%26gtm_experiment%3DGTM-TS4PDF6_OPT-WRW33%25241%26url%3Dhttps%253A%252F%252Fcloud.mail.dieteren.be%252Fmynew%252Fform%253Fbrand%253DSKODA%2526lang%253Dfr%2526model1%253DOC2%2526testdrive%253Dtrue%26opt_experiment_name%3DA%252FB%2520%25234%2520-%2520No%2520engagement%2520V2%26opt_variation_name%3DVariant%25201%26slim%3Dtrue%26container_name%3Dskoda.be&optimize_editor";
+const previewURL = "https://www.google-analytics.com/gtm/set_cookie?uiv2&id=GTM-TS4PDF6&gtm_auth=G4S7idMaTbioFtOmTgrRug&gtm_debug&gtm_experiment=GTM-TS4PDF6_OPT-WRW33%241&gtm_preview=opt_preview-slim&redirect=https%3A%2F%2Foptimize.google.com%2Foptimize%2Fsharepreview%3Fid%3DGTM-TS4PDF6%26gtm_experiment%3DGTM-TS4PDF6_OPT-WRW33%25241%26url%3Dhttps%253A%252F%252Fcloud.mail.dieteren.be%252Fmynew%252Fform%253Fbrand%253DSKODA%2526lang%253Dfr%2526model1%253DOC2%2526testdrive%253Dtrue%26opt_experiment_name%3DA%252FB%2520%25234%2520-%2520No%2520engagement%2520V2%26opt_variation_name%3DVariant%25201%26slim%3Dtrue%26container_name%3Dskoda.be&optimize_editor";
 
 //
 //
 
 const url = skodaObject.url;
 
+
+//--- start get brand name from URL query parameter 
 const result = url.match(/brand=(.*?)$/);
 const brand = result[1];
 console.log("Brand is  " + brand);
+//--- end get brand name from URL query parameter 
 
+
+
+// Puppeteer starts HERE --------------------------------------------------------------------
 
 (async () => {
-  const browser = await puppeteer.launch({headless: true}, { args: ['--no-sandbox'] }); // default is true
+  const browser = await puppeteer.launch({headless: true}, { args: ['--no-sandbox'] }); // default headless is true // no sandbox is for heroku
   console.log('start ' + deviceToTest.name);
   console.log(browser.wsEndpoint());
 
+  
+
   // on local machine COMMENT 
   // const browser = await bundledPuppeteer.connect({browserWSEndpoint: "<my-ws-endpoint>"});
-  //END COMMENT
+  //--------------END COMMENT
 
 const page = await browser.newPage();
 
@@ -220,13 +241,13 @@ await page.emulate(deviceFulldetails);
 
 
 
-//optimize preview load (uncomment to just test a normal website with no ab test)
+//--- START google optimize preview load (uncomment to just test a normal website with no ab test)
 // await page.goto(previewURL);
 // await page.click('body > div > div > div > main > md-whiteframe > div > div > div.opt-preview-content.opt-preview-link-container.ng-scope > a');
 // await page.content();
 // await page.waitFor(5000);
+// --- END google optimize preview link
 
-//
 
 //normal page load
 await page.goto(url);
@@ -234,7 +255,7 @@ await page.goto(url);
  
 
 
-//create folders for screenshots per run.
+// ---- create folders for screenshots per device per run.
 
 const dir = './tmp/' + brand + '/' + deviceToTest.name + '/' + dateTime + '/' ;
 console.log(dir);
@@ -248,8 +269,8 @@ fse.ensureDir(dir)
   console.error(err)
 })
 
+// ---- end create folders
 
-//
 
 await page.content();
 await page.click('#cookie-bar > p:nth-child(1) > a.cb-enable');
@@ -287,8 +308,7 @@ await page.screenshot({path: dir + '3-viewport.png', fullPage: false});
 await page.screenshot({path: dir + '3-fullPage.png', fullPage: true});
 
 
-//save datalayer to file
-
+//------ start save datalayer to file
 const analyticsData = await page.evaluate('dataLayer');
 
 fs.writeFile("dataLayer/dataLayer-" + deviceToTest.name + "-" + dateTime + ".json", JSON.stringify(analyticsData), "utf8", (err, data) => {
@@ -297,12 +317,19 @@ fs.writeFile("dataLayer/dataLayer-" + deviceToTest.name + "-" + dateTime + ".jso
 } else {
   console.log("dataLayerFileCreated-" + deviceToTest.name);
 }});
+//----- end save dataLayer
 
-//commented - else same garage gets many mails !!!!!
+
+//
+// IMPORTANT
+// --- START IMPORTANT =>  commented - else same garage gets many many  mails !!!!!
 
 // await page.click('#submitForm01');
 
+// --- END COMMENT IMPORTANT 
+//IMPORTANT
 //
+
 await page.content();
 await page.waitFor(5000);
 await page.screenshot({path: dir + '4-viewport.png', fullPage: false});
