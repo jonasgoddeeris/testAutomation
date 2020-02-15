@@ -4,7 +4,7 @@ puppeteer dieteren testAutomation
 
 
 
-##Project description
+*Project description*
 
 
 This is a browser automation tool that uses puppeteer to go trough the funnel of requesting a test drive of a skoda.
