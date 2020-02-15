@@ -12,7 +12,7 @@ const WebSocket = require('isomorphic-ws')
 //
 //
 // before starting
-// you need to add preview URL, URL and testDEVICES !!!!
+// you need to add google optimize preview URL, URL and define in the array which devices are the testDEVICES !!!!
 //
 //
 //------------------------------ END READ THIS ----------------------------------
@@ -23,26 +23,26 @@ const WebSocket = require('isomorphic-ws')
 
 //--------- custom WebSocket
 
-const ws = new WebSocket('wss://echo.websocket.org/', {
-  origin: 'https://websocket.org'
-});
+// const ws = new WebSocket('wss://echo.websocket.org/', {
+//   origin: 'https://websocket.org'
+// });
 
-ws.onopen = function open() {
-  console.log('connected');
-  ws.send(Date.now());
-};
+// ws.onopen = function open() {
+//   console.log('connected');
+//   ws.send(Date.now());
+// };
 
-ws.onclose = function close() {
-  console.log('disconnected');
-};
+// ws.onclose = function close() {
+//   console.log('disconnected');
+// };
 
-ws.onmessage = function incoming(data) {
-  console.log(`Roundtrip time: ${Date.now() - data.data} ms`);
+// ws.onmessage = function incoming(data) {
+//   console.log(`Roundtrip time: ${Date.now() - data.data} ms`);
 
-  setTimeout(function timeout() {
-    ws.send(Date.now());
-  }, 500);
-};
+//   setTimeout(function timeout() {
+//     ws.send(Date.now());
+//   }, 500);
+// };
 
 //------ end custom WebSocket
 
@@ -120,15 +120,14 @@ const galaxyS7 = {
 }
 
 
-// ---- END TEST DEVICES 
+// ---- END DEVICES OBJECTS
+
 
 
 
 
 // ---- ADD TESTdevices you want to test to the Array -----
-
 // const testDevices = [galaxyS5, galaxyS9, pixel2, Nexus6P, desktop1440_880, iPhoneX, iPhone5, iPad, iPadPro];
-
 const testDevices = [iPhoneX];
 
 
@@ -322,7 +321,7 @@ fs.writeFile("dataLayer/dataLayer-" + deviceToTest.name + "-" + dateTime + ".jso
 
 //
 // IMPORTANT
-// --- START IMPORTANT =>  commented - else same garage gets many many  mails !!!!!
+// --- START IMPORTANT =>  commented linne below  - else same garage gets many many  mails !!!!!
 
 // await page.click('#submitForm01');
 
