@@ -1,23 +1,21 @@
-// 
-
-
-//!--- READ THIS
-
-
-// before starting
-// you need to add preview URL, URL and testDEVICES !!!!
-
-
-//-----END READ THIS
-//
-
-
-
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const fse = require('fs-extra');
 const devices = require('puppeteer/DeviceDescriptors');
 const WebSocket = require('isomorphic-ws')
+
+
+
+// 
+//!--- READ THIS
+// before starting
+// you need to add preview URL, URL and testDEVICES !!!!
+//-----END READ THIS
+//
+
+
+
+
 
 const ws = new WebSocket('wss://echo.websocket.org/', {
   origin: 'https://websocket.org'
@@ -39,10 +37,6 @@ ws.onmessage = function incoming(data) {
     ws.send(Date.now());
   }, 500);
 };
-
-
-
-
 
 
 
@@ -141,6 +135,8 @@ const audiObject = {
   url: 'https://cloud.mail.dieteren.be/mynew/cars?lang=nl&brand=Audi'
 }
 
+//end brand objects
+
 
 //date time stamp formatting
 
@@ -176,11 +172,14 @@ let dateTime = today + "-" + time;
 console.log("dateTime is " + dateTime);
 
 
+// end dateTime Stamp formatting
 
 
+// Run function
 
+// testAll(testDevices);  //commented to sse effect on build !!
 
-testAll(testDevices);
+// end run function
 
 function testAll (data) {
   for (let deviceToTest of data){

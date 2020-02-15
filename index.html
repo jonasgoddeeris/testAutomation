@@ -4,33 +4,23 @@
     <title>Puppeteer - Automatic testing</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
- <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ 	<link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 
-
 <h1>MyNew</h1>
-<p>Automatic testing of funnel</p>
-
-<label for="exampleFormControlInput1">MyNew URL waarvoor je PageSpeed wil berekenen</label>
-    <input type="text" class="form-control" id="input" placeholder="een URL https://www.example.be">
-    <small id="HelpBlock" class="form-text text-muted">
-      De url moet http protocol bevatten [copy paste van browserbalk ;)]<br>Momenteel enkel met Skoda<br> Het ophalen van de data kan 1m 30 sec duren.
-</small>
-<label for="exampleFormControlInput1">Checkboxen met de apparaten die je wil testen</label>
-
-
+<p>Automatic testing of MyNew Skoda funnel</p>
 
 <br>
-      <button type="button" id="submit" class="btn btn-primary mb-2">Confirm</button>
+
+<button type="button" id="submit" class="btn btn-primary mb-2" onclick="testAll(testDevices)">Test All Devices</button>
 
 
-<  <script src="./index.js"></script>
+<script src="./index.js"></script>
 
 </body>
-
 
 
 </html>
