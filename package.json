@@ -7,7 +7,7 @@
     "fs-extra": "^8.1.0",
     "heroku": "^7.38.1",
     "isomorphic-ws": "^4.0.1",
-    "npm": "^6.13.7",
+    "npm": "^6.14.6",
     "parcel-bundler": "^1.12.4",
     "puppeteer": "^2.1.0",
     "uncss": "^0.17.2",
