@@ -13,6 +13,10 @@ At this test drive request funnel
 https://cloud.mail.dieteren.be/mynew/cars?lang=nl&brand=skoda
 
 
+The END RESULT 
+https://test-automation-dieteren.herokuapp.com/
+
+
 The puppeteer part works specifically for this funnel, but the shell can be easly reused for other funnels, webtools or pages.
 
 
