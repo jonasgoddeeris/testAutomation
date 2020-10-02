@@ -1,0 +1,11 @@
+{
+  "name": "2datetime",
+  "version": "1.0.0",
+  "description": "get current date and time",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me",
+  "license": "MIT"
+}
